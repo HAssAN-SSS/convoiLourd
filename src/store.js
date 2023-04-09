@@ -6,7 +6,7 @@ export let store
 let initialState = null
 
 // let dispatch = useDispatch()
-
+// !-----------------------------------------------------------REDUCER------------------------------------
 function todoReduer(state = initialState,action){
 
     switch(action.type){
@@ -24,18 +24,21 @@ function todoReduer(state = initialState,action){
                     lesDemandes:{
                                     todo : action.paylod
                                 },
-                    basicOPT : action.basicOPT,
-                    sidOpt : action.sidOpt
+                    
                 }
             )
         case OPERATION_AFFECT :
-            return (
+            return ({
                 ...state,
                 
+                user_operation : action.paylod
+                    }
             )
         default: return (store)
     }
 }
+// !-----------------------------------------------------------REDUCER-----------------------------------------------------
+
 const FETCH_DONE = 'FETCH_DONE'
 const FETCHE_ERROR = 'FETCH_ERROR'
 const FETCH_LOADING = 'FETACH_LOADING'
@@ -59,7 +62,6 @@ export function fetchError() {
     }
 
 export function fetchLoading() {
-    console.log('loading')
         return(
             {
                 type:FETCH_LOADING,
@@ -71,12 +73,12 @@ export function fetchLoading() {
             )
         }
 
-export function operationAffect(basicOPT,sidOpt) {
+export function operationAffect(lesOpt) {
         return(
                 {
                     type:OPERATION_AFFECT,
-                    [basicOPT] : basicOPT,
-                    [sidOpt] : sidOpt
+                    paylod: lesOpt
+                        
                 }
                 
                 )
@@ -104,6 +106,6 @@ export function operationAffect(basicOPT,sidOpt) {
 // }
        
 store = legacy_createStore(todoReduer,applyMiddleware(thunk))
-store.subscribe(() => {
-    console.log(store.getState())
-})
+// store.subscribe(() => {
+//     console.log(store.getState())
+// })

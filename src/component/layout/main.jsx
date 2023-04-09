@@ -3,7 +3,7 @@ import './main.css'
 
 export default function Main () {
     const data = store.getState();
-    console.log('test demande:',data)
+    // console.log('test demande:',data)
     let listDemade = data.lesDemandes.todo.map(function (dmd) {
         return(
             <div key={dmd.dmd} className='demande'>
