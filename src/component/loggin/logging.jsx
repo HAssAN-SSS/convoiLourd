@@ -1,7 +1,7 @@
 import React from 'react';
 import './logging.css';
 export default function Loggin () {
-    let [userInfo,setUserInfo] = React.useState({})
+    let [userInfo,setUserInfo] = React.useState(null)
     let [loginValue,setLoginValue] = React.useState(
         {
             name:'',
@@ -29,7 +29,7 @@ export default function Loggin () {
           .catch(error => {
             console.log('fetchError a hassan')
           });
-          console.log(userInfo)
+        //   console.log(userInfo)
 
     }
 
@@ -43,6 +43,7 @@ export default function Loggin () {
         })
     }
     return (
+    <>
         <div className="logging">
             <img src="./img/tme.png" alt="tmeLogo" />
             <label htmlFor="user">User:</label>
@@ -63,5 +64,8 @@ export default function Loggin () {
             />
             <button onClick={logBtn}>log in</button>
         </div>
-    )
+        <h5>{ userInfo === 'not access' ?  <b>"Invalid username or password. Please check and try again."</b> : '' }</h5>
+       
+    </>
+)
 }
