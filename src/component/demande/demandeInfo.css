@@ -1,0 +1,9 @@
+body{
+    margin: 0;
+    box-sizing: border-box;
+}
+.demandeinfo{
+    background-color: aqua;
+    /* height: 45vh; */
+    /* width: 50%; */
+}

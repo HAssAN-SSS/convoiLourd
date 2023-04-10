@@ -4,13 +4,15 @@ import Main from "./main"
 import './layout.css'
 import { operationAffect } from "../../store"
 import { useParams } from "react-router"
-import { fetchDone,fetchError,fetchLoading } from "../../store"
+import { fetchDone,fetchError,fetchLoading,store } from "../../store"
 import { useDispatch} from "react-redux"
 import { useEffect , useState} from "react"
 export let params
 
 export default function Layout () {
   let [letGo,setLetGo] = useState(false)
+  let dataStore = store.getState()
+  console.log(dataStore)
   let Dispatch = useDispatch()
   // !------------------useEffect------------------
    useEffect(() => {
@@ -108,13 +110,13 @@ export default function Layout () {
      //  ------------------------------------set operation foreach role -------------------
 
     Dispatch(operationAffect(lesOpt))
-     
+
        return (
            <div className="layout">
    
                {letGo?<Nav />:'loding...'}
 
-               {letGo?<Aside />:'loding...'}
+               {letGo? <Aside />:'loding...'}
                {letGo?<Main />:'loding...'}
 
            </div>

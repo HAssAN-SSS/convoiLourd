@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { store } from '../../store'
 import './main.css'
 
@@ -6,7 +7,9 @@ export default function Main () {
     // console.log('test demande:',data)
     let listDemade = data.lesDemandes.todo.map(function (dmd) {
         return(
-            <div key={dmd.dmd} className='demande'>
+            <Link key={dmd.dmd} to={`/${dmd.dmd}/${'id_user'}/${'demande'}`} > 
+
+            <div  className='demande'>
                 <div className='id-demande'>
                     <h5>ID Demande</h5>
                     {dmd.dmd}
@@ -28,6 +31,7 @@ export default function Main () {
                     {dmd.societe_client}
                 </div>
             </div>
+            </Link>
         )
     })
     return(
