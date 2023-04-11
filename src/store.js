@@ -15,6 +15,8 @@ function todoReduer(state = initialState,action){
             return {
                 ...state,
                 loading:action.paylod.loading,
+                sideOptActuel : 'To Do',
+                
             }
         case FETCH_DONE :
             return (
@@ -22,7 +24,9 @@ function todoReduer(state = initialState,action){
                     ...state,
                     loading:false,
                     lesDemandes:{
-                                    todo : action.paylod
+                                    todo : action.paylod,
+                                    done:null,
+                                    refused:null
                                 },
                     
                 }
@@ -34,7 +38,21 @@ function todoReduer(state = initialState,action){
                 user_operation : action.paylod
                     }
             )
-        default: return (store)
+        case PUT_SIDEOPT_ACTUEL :
+            return ({
+                ...state,
+                
+                sideOptActuel : action.paylod
+                    }
+            )
+        case PUT_DEMANDE_ACTUEL :
+            return ({
+                ...state,
+                
+                dmdActual : action.paylod
+                    }
+            )
+        default: return (state)
     }
 }
 // !-----------------------------------------------------------REDUCER-----------------------------------------------------
@@ -43,6 +61,8 @@ const FETCH_DONE = 'FETCH_DONE'
 const FETCHE_ERROR = 'FETCH_ERROR'
 const FETCH_LOADING = 'FETACH_LOADING'
 const OPERATION_AFFECT = 'OPERATION_AFFECT'
+const PUT_SIDEOPT_ACTUEL = 'PUT_SIDEOPT_ACTUEL'
+const PUT_DEMANDE_ACTUEL = 'PUT_DEMANDE_ACTUEL'
 export function fetchDone(data) {
     return(
         {
@@ -83,7 +103,28 @@ export function operationAffect(lesOpt) {
                 
                 )
             }
-        
+
+export function sideOptActuel(optActuel) {
+    return(
+            {
+                type:PUT_SIDEOPT_ACTUEL,
+                paylod: optActuel
+                    
+            }
+            
+            )
+        }
+export function demandeActuel(demandeInfo) {
+    return(
+            {
+                type:PUT_DEMANDE_ACTUEL,
+                paylod: demandeInfo
+                    
+            }
+            
+            )
+        }
+
 // export function fetchLlamada () {
 //     let dispatch = useDispatch()
 //     return function (dispatch) {
@@ -106,6 +147,6 @@ export function operationAffect(lesOpt) {
 // }
        
 store = legacy_createStore(todoReduer,applyMiddleware(thunk))
-// store.subscribe(() => {
-//     console.log(store.getState())
-// })
+store.subscribe(() => {
+    console.log(store.getState())
+})

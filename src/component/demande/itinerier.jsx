@@ -1,7 +1,7 @@
-
+import './itinerier.css'
 export default function Itineraire() {
     return(
-        <div className="Itineraire">
+        <div className="itineraire">
 
         </div>
     )

@@ -1,13 +1,35 @@
 import { Link } from 'react-router-dom';
 import { store } from '../../store'
+import { useParams } from 'react-router-dom';
 import './main.css'
+import { useEffect, useState } from 'react';
 
-export default function Main () {
-    const data = store.getState();
+export default function Main (props) {
+    let params = useParams()
+    let [data,setdata] = useState(store.getState())
+    
+    // let [datosDemandas,setDatosDemandas] = useState(data.lesDemandes.todo)
+    let datosDemandas = data.lesDemandes.todo
     // console.log('test demande:',data)
-    let listDemade = data.lesDemandes.todo.map(function (dmd) {
+    useEffect(() => {
+        setdata(() => store.getState())
+        console.log('state getting')
+    },[props])
+    if(data !== null){
+        console.log('main render')
+        switch(data.sideOptActuel){
+            case 'Done' : datosDemandas =  data.lesDemandes.done 
+                break
+            case 'Refused' : datosDemandas =  data.lesDemandes.done 
+                break
+            default : datosDemandas =  data.lesDemandes.todo 
+        }
+        
+        // console.log(props)
+        
+        var listDemade =datosDemandas.map(function (dmd) {
         return(
-            <Link key={dmd.dmd} to={`/${dmd.dmd}/${'id_user'}/${'demande'}`} > 
+            <Link key={dmd.dmd} to={`/${params.role}/${params.id_user}/${params.version}/${dmd.dmd}/${'demande'}`} > 
 
             <div  className='demande'>
                 <div className='id-demande'>
@@ -34,9 +56,10 @@ export default function Main () {
             </Link>
         )
     })
+}
     return(
         <span className="main">
-            {listDemade}
+            {data ? listDemade : 'error main'}
             
         </span>
     )

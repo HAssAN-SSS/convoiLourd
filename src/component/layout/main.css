@@ -3,17 +3,28 @@
     box-sizing: border-box;
 }
 .main{
-    width: 100%;
-    height: 85vh;
-    background-color: rgb(23, 149, 107);
+    /* width: 100%;
+    height: 85vh; */
+    background-color: rgb(60, 64, 69);
 }
 .demande{
-    background-color: brown;
-    width: 99%;
+    background-color: rgb(96, 97, 102);
+    width: 97%;
     height: 10vh;
-    margin: 1% 0.5% 0;
+    margin: 1.5%;
+    /* margin-right: 2%; */
     text-align: center;
     display: flex;
     justify-content: space-around;
     align-items: center;
+    border-radius: 7px;
+    box-shadow: 0px 0px 8px rgb(153, 152, 152);
+    color: aliceblue;
+    text-decoration: none;
+    text-decoration-line: none;
 }
+a {
+    text-decoration: none;
+    color: black;
+  }
+ 

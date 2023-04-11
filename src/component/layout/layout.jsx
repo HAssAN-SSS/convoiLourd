@@ -59,12 +59,12 @@ export default function Layout () {
                           sideOpt:{
                             sideOpt1: 'To Do',
                             sideOpt2: 'Done',
-                            sideOpt3: 'refused',
+                            sideOpt3: 'Refused',
                           },
                           basicopt:{
-                            opt1: 'validate',
-                            opt2: 'refuse',
-                            opt3: 'Choisir l itineraire'
+                            opt1: 'Validate',
+                            opt2: 'Refuse',
+                            opt3: 'Choisir_itineraire'
                             }
                           }
                         )
@@ -76,7 +76,7 @@ export default function Layout () {
                           sideOpt:{
                             sideOpt1: 'Demandes',
                             sideOpt2: 'Accepted',
-                            sideOpt3: 'refused',
+                            sideOpt3: 'Refused',
                           },
                           basicopt:{
                             opt1: 'Submite',
@@ -94,11 +94,11 @@ export default function Layout () {
                             
                             sideOpt1: 'To Do',
                             sideOpt2: 'Done',
-                            sideOpt3: 'refused',
+                            sideOpt3: 'Refused',
                           },
                           basicopt:{
-                            opt1: 'validate',
-                            opt2: 'refuse',
+                            opt1: 'Validate',
+                            opt2: 'Refuse',
                             opt3: null
                             }
                           }
@@ -107,17 +107,30 @@ export default function Layout () {
       }
       
     }
-     //  ------------------------------------set operation foreach role -------------------
-
     Dispatch(operationAffect(lesOpt))
+     //  ------------------------------------set operation foreach role -------------------
+    // ?-------------------------------------render demandes foreach role------------------------
+    // let datosDemandas = dataStore.lesDemandes  ? dataStore.lesDemandes.todo : ''
+    // function renderDemandes(){
+    //   switch(dataStore.sideoptActuel){
+    //     case 'Done' : datosDemandas = dataStore.lesDemandes.done; 
+    //         break
+    //     case 'Refused' : datosDemandas = dataStore.lesDemandes.refused
+    //         break
+    //     default : datosDemandas = dataStore.lesDemandes.todo
+    // }
+    // }
+    let [boolSide,setBollside] = useState(true)
+    console.log(boolSide)
+    // ?-------------------------------------render demandes foreach role------------------------
 
        return (
            <div className="layout">
    
                {letGo?<Nav />:'loding...'}
 
-               {letGo? <Aside />:'loding...'}
-               {letGo?<Main />:'loding...'}
+               {letGo? <Aside redender={setBollside}/>:'loding...'}
+               {letGo?<Main boll={boolSide}/>:'loding...'}
 
            </div>
        )

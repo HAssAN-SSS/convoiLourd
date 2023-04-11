@@ -76,7 +76,7 @@ export default function Loggin () {
         </div>
         <h5>
             { userInfo === 'not access' ?  <b>"Invalid username or password. Please check and try again."</b> : ''  }
-            {(userInfo === 'not access' || userInfo === null) || <Navigate to={`/${userInfo.role}/:${userInfo.id}/:${userInfo.version}`} />}
+            {(userInfo === 'not access' || userInfo === null) || <Navigate to={`/${userInfo.role}/${userInfo.id}/${userInfo.version}`} />}
            
         </h5>
        
