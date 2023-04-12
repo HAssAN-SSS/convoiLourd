@@ -16,6 +16,7 @@ function todoReduer(state = initialState,action){
                 ...state,
                 loading:action.paylod.loading,
                 sideOptActuel : 'To_Do',
+                valido:false
                 
             }
         case FETCH_DONE :
@@ -66,6 +67,13 @@ function todoReduer(state = initialState,action){
                                         
                         }
                 )
+            case VALIDO_O_NO :
+                return (
+                        {
+                        ...state,
+                        valido:true
+                        }
+                )
         default: return (state)
     }
 }
@@ -79,6 +87,7 @@ const PUT_SIDEOPT_ACTUEL = 'PUT_SIDEOPT_ACTUEL'
 const PUT_DEMANDE_ACTUEL = 'PUT_DEMANDE_ACTUEL'
 const TODO_FETCH = 'TODO_FETCH'
 const REFUSED_FETCH = 'REFUSED_FETCH'
+const VALIDO_O_NO = 'VALIDO_O_NO'
 export function fetchDone(data) {
     return(
         {
@@ -160,7 +169,15 @@ export function refusedFetch(data) {
             
             )
         }
-        
+export function validation(respon) {
+    return(
+            {
+                type:VALIDO_O_NO,
+                paylod:respon
+            }
+            
+            )
+        }
 // export function fetchLlamada () {
 //     let dispatch = useDispatch()
 //     return function (dispatch) {

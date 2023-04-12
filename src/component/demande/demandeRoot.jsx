@@ -10,6 +10,8 @@ export default function DemandeRoot() {
     let params = useParams()
     let Dispatch = useDispatch()
     let [letGo,setLetGo] = useState(false)
+    let [re_rend,setre_rend] = useState(false)
+
     useEffect(() => {
         fetch('http://localhost:3001/demande',
             {
@@ -32,7 +34,7 @@ export default function DemandeRoot() {
     },[])
     return (
         <div className="demande-root">
-            {letGo ? <DemandeInfo rende={letGo}/> : 'loading...'}
+            {letGo ? <DemandeInfo rende={letGo} setre_rend={setre_rend}/> : 'loading...'}
             
             <Itineraire />
             <Vehicule />

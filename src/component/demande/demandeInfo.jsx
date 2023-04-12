@@ -1,23 +1,108 @@
 import './demandeInfo.css'
 import { store } from '../../store'
 import { useEffect, useState } from 'react'
+import { useParams } from 'react-router'
+import { useDispatch } from 'react-redux'
+
 export default function DemandeInfo(props) {
+    let [valido,setValido] = useState(false)
+    // let valido 
+    let [re_rend,setre_rend] = useState(false)
+    let Dispatch = useDispatch()
+
+    let params = useParams()
+    let puedes = true 
     let [demandeData,setDemandeData] = useState(store.getState())
     
     useEffect(() => {
         setDemandeData(() => store.getState())  
         
     },[props.rende])
-    // ?--------------------------------set basic opt ----------------------------------
+    // ?--------------------------------set basic opt list----------------------------------
         let lesBascopt = demandeData.user_operation.basicopt
         let basicOptList =[]
+        let cc = 0
         for(let key in lesBascopt) {
+            cc =+ 1
             basicOptList.push(
-                <button className={lesBascopt[key]+'btn'}>{lesBascopt[key]}</button>
+                <button key={lesBascopt[key]+cc} className={lesBascopt[key]+'btn'} onClick={whenbasicOtpClick}>{lesBascopt[key]}</button>
             )
         }
         
-    // ?--------------------------------set basic opt ----------------------------------
+    // ?--------------------------------set basic opt list----------------------------------
+        if(demandeData.sideOptActuel !== 'To_Do') {
+                   puedes = false
+                }
+    // !------------------------------------onclick function for each btn ---------------------
+        function whenbasicOtpClick (event) {
+            
+            if(event.target.textContent === 'Validate') {
+                console.log('basicOpt:',  event.target.textContent)
+                validate (params)
+            }else if(event.target.textContent === 'Refuse') {
+                refusation(params)
+            }
+        }
+
+                    // =======================Validate=================
+
+        function validate (params) {
+            // props.rende ? props.setre_rend(false) : props.setre_rend(true)
+            console.log(params.role)
+            fetch('http://localhost:3001/validate',
+            {
+            method:'POST',
+            body:JSON.stringify(
+                {
+                    id_demande:params.id_demande,
+                    id_user:params.id_user,
+                    role:params.role
+                   }
+                   )
+        })
+            .then(respon => respon.json())
+            .then((data) => {
+                console.log(data)
+                    // Dispatch(validation())
+                setValido(data[0].access)
+                // let valido = data[0].access
+                
+                // console.log(valido)
+
+            })
+            .catch(err => console.log('validation error: ',err))
+        }
+                    // =======================Validate=================
+                    // !==========================Refuse================
+
+        function refusation (params) {
+            setValido(true)
+            // props.rende ? props.setre_rend(false) : props.setre_rend(true)
+            console.log(params.role)
+            fetch('http://localhost:3001/refusation',
+            {
+            method:'POST',
+            body:JSON.stringify(
+                {
+                    id_demande:params.id_demande,
+                    id_user:params.id_user,
+                    role:params.role
+                    }
+                    )
+        })
+            .then(respon => respon.json())
+            .then((data) => {
+                console.log(data)
+                setValido(data[0].access)
+                console.log(valido)
+
+            })
+            .catch(err => console.log('validation error: ',err))
+        }
+                    // !==========================Refuse================
+
+    // !------------------------------------onclick function for each btn ---------------------
+
     let demandeActuelData = demandeData.dmdActual.demandeInfo
     return(
         <div className="demandeinfo">
@@ -68,7 +153,7 @@ export default function DemandeInfo(props) {
                     <hr />
                     {/* ----------opt buttons---------------- */}
                 <div className='basicOpt'>
-                    {basicOptList}
+                    {!puedes ? demandeData.sideOptActuel : (valido === 'usuario no tiene access' ? '!error': (valido === 'valido' ? 'valido' : (valido ? 'conexion error!' : basicOptList) ))}
                 </div>
         </div>
     )

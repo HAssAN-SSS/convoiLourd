@@ -62,10 +62,10 @@ export default function Main (props) {
                     if(datosDemandas){
                         // setLetGo(() => true)
                         console.log('main render')
-                        
+                        let cc = 0
                         var listDemade = store.getState().lesDemandes.map(function (dmd) {
                             return(
-            <Link key={dmd.id_demande} to={`/${params.role}/${params.id_user}/${params.version}/${dmd.id_demande}/${'demande'}`} > 
+            <Link key={data.sideOptActuel + Math.floor(Math.random() * (100 - 0 + 1))} to={`/${params.role}/${params.id_user}/${params.version}/${dmd.id_demande}/${'demande'}`} > 
 
                 <div>
                     {data.sideOptActuel}
