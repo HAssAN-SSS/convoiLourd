@@ -15,7 +15,7 @@ function todoReduer(state = initialState,action){
             return {
                 ...state,
                 loading:action.paylod.loading,
-                sideOptActuel : 'To Do',
+                sideOptActuel : 'To_Do',
                 
             }
         case FETCH_DONE :
@@ -23,35 +23,49 @@ function todoReduer(state = initialState,action){
                 {
                     ...state,
                     loading:false,
-                    lesDemandes:{
-                                    todo : action.paylod,
-                                    done:null,
-                                    refused:null
-                                },
-                    
+                    lesDemandes: action.paylod
+                                    
                 }
             )
         case OPERATION_AFFECT :
             return ({
                 ...state,
                 
-                user_operation : action.paylod
+                    user_operation : action.paylod
                     }
             )
         case PUT_SIDEOPT_ACTUEL :
             return ({
                 ...state,
                 
-                sideOptActuel : action.paylod
+                    sideOptActuel : action.paylod
                     }
             )
         case PUT_DEMANDE_ACTUEL :
             return ({
                 ...state,
                 
-                dmdActual : action.paylod
+                    dmdActual : action.paylod
                     }
             )
+        case TODO_FETCH :
+            return (
+                    {
+                    ...state,
+                    loading:false,
+                    lesDemandes:action.paylod,
+
+                    }
+            )
+            case REFUSED_FETCH :
+                return (
+                        {
+                        ...state,
+                        loading:false,
+                        lesDemandes: action.paylod
+                                        
+                        }
+                )
         default: return (state)
     }
 }
@@ -63,6 +77,8 @@ const FETCH_LOADING = 'FETACH_LOADING'
 const OPERATION_AFFECT = 'OPERATION_AFFECT'
 const PUT_SIDEOPT_ACTUEL = 'PUT_SIDEOPT_ACTUEL'
 const PUT_DEMANDE_ACTUEL = 'PUT_DEMANDE_ACTUEL'
+const TODO_FETCH = 'TODO_FETCH'
+const REFUSED_FETCH = 'REFUSED_FETCH'
 export function fetchDone(data) {
     return(
         {
@@ -124,7 +140,27 @@ export function demandeActuel(demandeInfo) {
             
             )
         }
-
+export function todoFetch(data) {
+    return(
+            {
+                type:TODO_FETCH,
+                paylod: data
+                    
+            }
+            
+            )
+        }
+export function refusedFetch(data) {
+    return(
+            {
+                type:REFUSED_FETCH,
+                paylod: data
+                    
+            }
+            
+            )
+        }
+        
 // export function fetchLlamada () {
 //     let dispatch = useDispatch()
 //     return function (dispatch) {
@@ -146,7 +182,7 @@ export function demandeActuel(demandeInfo) {
 //     }
 // }
        
-store = legacy_createStore(todoReduer,applyMiddleware(thunk))
-store.subscribe(() => {
-    console.log(store.getState())
-})
+store = legacy_createStore(todoReduer)
+// store.subscribe(() => {
+//     console.log(store.getState())
+// })

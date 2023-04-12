@@ -7,18 +7,21 @@ import { useParams } from "react-router"
 import { fetchDone,fetchError,fetchLoading,store } from "../../store"
 import { useDispatch} from "react-redux"
 import { useEffect , useState} from "react"
+import { todoFetch } from '../../store';
+
 export let params
 
 export default function Layout () {
   let [letGo,setLetGo] = useState(false)
   let dataStore = store.getState()
+  let [sideOptVar,setSideOptVar] = useState('To_Do')
   console.log(dataStore)
   let Dispatch = useDispatch()
   // !------------------useEffect------------------
    useEffect(() => {
        Dispatch(fetchLoading())
       //  console.log('useEffect')
-       fetch('http://localhost:3001/todo',
+       fetch('http://localhost:3001/To_Do',
        {
            method:'POST',
            
@@ -33,16 +36,17 @@ export default function Layout () {
               .then(response => response.json()
               )
               .then(data => {
-      Dispatch(fetchDone(data))
-      setLetGo(prv => true)
-      setOperations(params.role)
+                                  Dispatch(fetchDone(data))
+                                  setLetGo(prv => true)
+                                  setOperations(params.role)
+                                  
     })
     .catch(error => {
       console.log('fetchError a hassan')
       Dispatch(fetchError())
     });
     
-          },[letGo,Dispatch])
+          },[])
           // store.subscribe(() => console.log(store.getState()))
         // !----------------------------------useEffect----------------------------
      params = useParams()
@@ -57,7 +61,7 @@ export default function Layout () {
                         return(
                           {
                           sideOpt:{
-                            sideOpt1: 'To Do',
+                            sideOpt1: 'To_Do',
                             sideOpt2: 'Done',
                             sideOpt3: 'Refused',
                           },
@@ -92,7 +96,7 @@ export default function Layout () {
                           {
                             sideOpt:{
                             
-                            sideOpt1: 'To Do',
+                            sideOpt1: 'To_Do',
                             sideOpt2: 'Done',
                             sideOpt3: 'Refused',
                           },
@@ -108,29 +112,29 @@ export default function Layout () {
       
     }
     Dispatch(operationAffect(lesOpt))
-     //  ------------------------------------set operation foreach role -------------------
+    //  ------------------------------------set operation foreach role -------------------
     // ?-------------------------------------render demandes foreach role------------------------
     // let datosDemandas = dataStore.lesDemandes  ? dataStore.lesDemandes.todo : ''
     // function renderDemandes(){
-    //   switch(dataStore.sideoptActuel){
-    //     case 'Done' : datosDemandas = dataStore.lesDemandes.done; 
-    //         break
-    //     case 'Refused' : datosDemandas = dataStore.lesDemandes.refused
-    //         break
-    //     default : datosDemandas = dataStore.lesDemandes.todo
-    // }
-    // }
-    let [boolSide,setBollside] = useState(true)
-    console.log(boolSide)
+      //   switch(dataStore.sideoptActuel){
+        //     case 'Done' : datosDemandas = dataStore.lesDemandes.done; 
+        //         break
+        //     case 'Refused' : datosDemandas = dataStore.lesDemandes.refused
+        //         break
+        //     default : datosDemandas = dataStore.lesDemandes.todo
+        // }
+        // }
+        let [boolSide,setBollside] = useState(1)
+        
     // ?-------------------------------------render demandes foreach role------------------------
 
        return (
-           <div className="layout">
+           <div className="layout" >
    
                {letGo?<Nav />:'loding...'}
 
-               {letGo? <Aside redender={setBollside}/>:'loding...'}
-               {letGo?<Main boll={boolSide}/>:'loding...'}
+               {letGo? <Aside redender={setBollside} sideOptVar={setSideOptVar}/>:'loding...'}
+               {letGo?<Main boolSide={boolSide}/>:'loding...'}
 
            </div>
        )
