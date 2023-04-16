@@ -200,6 +200,6 @@ export function validation(respon) {
 // }
        
 store = legacy_createStore(todoReduer)
-// store.subscribe(() => {
-//     console.log(store.getState())
-// })
+store.subscribe(() => {
+    console.log(store.getState())
+})

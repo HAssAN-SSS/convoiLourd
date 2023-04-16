@@ -49,7 +49,10 @@ useEffect(() => {call = true})
              body:JSON.stringify(
                         {
                             id_user:params.id_user,
-                            role:params.role
+                            role:params.role,
+                            sideActuel:store.getState().sideOptActuel
+
+
                         }
                     )
                }

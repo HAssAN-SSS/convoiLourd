@@ -32,12 +32,16 @@ export default function DemandeRoot() {
         })
         .catch(err => 'demande data error')
     },[])
+    // setLetGo(false)
     return (
         <div className="demande-root">
             {letGo ? <DemandeInfo rende={letGo} setre_rend={setre_rend}/> : 'loading...'}
+            {letGo ? <Itineraire rende={letGo} setre_rend={setre_rend}/> : 'loading...'}
+
+            {letGo ? <Vehicule rende={letGo} setre_rend={setre_rend}/> : 'loading...'}
             
-            <Itineraire />
-            <Vehicule />
+            {/* <Itineraire /> */}
+            {/* <Vehicule /> */}
         </div>
     )
 }

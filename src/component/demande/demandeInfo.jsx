@@ -153,7 +153,7 @@ export default function DemandeInfo(props) {
                     <hr />
                     {/* ----------opt buttons---------------- */}
                 <div className='basicOpt'>
-                    {!puedes ? demandeData.sideOptActuel : (valido === 'usuario no tiene access' ? '!error': (valido === 'valido' ? 'valido' : (valido ? 'conexion error!' : basicOptList) ))}
+                    {!puedes ?<><h2>{demandeData.sideOptActuel}</h2><br />{demandeActuelData.myDateOpt}</>  : (valido === 'usuario no tiene access' ? '!error': (valido === 'valido' ?<h2>valido <br /></h2>  : (valido ? 'conexion error!' : basicOptList) ))}
                 </div>
         </div>
     )

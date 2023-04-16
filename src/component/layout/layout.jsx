@@ -27,8 +27,9 @@ export default function Layout () {
            
            body:JSON.stringify(
                {
-                   id_user:params.id,
-                   role:params.role
+                   id_user:params.id_user,
+                   role:params.role,
+                   sideActuel:'start'
                   }
                   )
               }
@@ -39,10 +40,11 @@ export default function Layout () {
                                   Dispatch(fetchDone(data))
                                   setLetGo(prv => true)
                                   setOperations(params.role)
+                                  console.log('ferst data is come')
                                   
     })
     .catch(error => {
-      console.log('fetchError a hassan')
+      console.log('fetchError To_Do',error)
       Dispatch(fetchError())
     });
     
@@ -80,12 +82,11 @@ export default function Layout () {
                           sideOpt:{
                             sideOpt1: 'Demandes',
                             sideOpt2: 'Accepted',
-                            sideOpt3: 'Refused',
+                            sideOpt3: 'Refused_',
                           },
                           basicopt:{
                             opt1: 'Submite',
                             opt2: 'Cancel',
-                            opt3: null
                             }
                           }
                         )
@@ -103,7 +104,6 @@ export default function Layout () {
                           basicopt:{
                             opt1: 'Validate',
                             opt2: 'Refuse',
-                            opt3: null
                             }
                           }
                         )
