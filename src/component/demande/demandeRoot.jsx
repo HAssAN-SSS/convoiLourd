@@ -6,6 +6,7 @@ import Itineraire from "./itinerier"
 import Vehicule from "./vehicule"
 import { useDispatch } from "react-redux"
 import { demandeActuel } from "../../store"
+import Nav from "../layout/nav"
 export default function DemandeRoot() {
     let params = useParams()
     let Dispatch = useDispatch()
@@ -35,6 +36,7 @@ export default function DemandeRoot() {
     // setLetGo(false)
     return (
         <div className="demande-root">
+            <Nav />
             {letGo ? <DemandeInfo rende={letGo} setre_rend={setre_rend}/> : 'loading...'}
             {letGo ? <Itineraire rende={letGo} setre_rend={setre_rend}/> : 'loading...'}
 

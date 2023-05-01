@@ -7,15 +7,15 @@ body{
     height: 100%; */
     background-color: rgb(81, 83, 86);
     border-radius: 7px;
-    font-size: 117%;
     padding-top: 3%;
-    box-shadow: 0px 0px 10px rgb(151, 150, 147);
+    /* box-shadow: 0px 0px 10px rgb(151, 150, 147); */
     padding: 3%;
+    /* font-size: 117%; */
 
     
 }
 .vehicule:hover{
-    box-shadow: 0px 0px 0px rgb(151, 150, 147);
+    /* box-shadow: 0px 0px 0px rgb(151, 150, 147); */
 
 }
 .vehicule-info{

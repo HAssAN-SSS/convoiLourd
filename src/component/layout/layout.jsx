@@ -85,8 +85,8 @@ export default function Layout () {
                             sideOpt3: 'Refused_',
                           },
                           basicopt:{
-                            opt1: 'Submite',
-                            opt2: 'Cancel',
+                            // opt1: 'Submite',
+                            // opt2: 'Cancel',
                             }
                           }
                         )

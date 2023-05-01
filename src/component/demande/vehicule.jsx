@@ -16,6 +16,7 @@ if(vehicule){
 
     return(
         <div className='vehicule'>
+            <h2>Vehicule info</h2>
             <div className='matricul'>#Matricule: {vehicule.matricule}</div>
             <div className='vehicule-info'>
                 <div className='vehicule-info-leftside'>

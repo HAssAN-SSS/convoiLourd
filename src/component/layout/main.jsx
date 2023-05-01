@@ -65,31 +65,46 @@ export default function Main (props) {
                         let cc = 0
                         var listDemade = store.getState().lesDemandes.map(function (dmd) {
                             return(
-            <Link key={data.sideOptActuel + Math.floor(Math.random() * (100 - 0 + 1))} to={`/${params.role}/${params.id_user}/${params.version}/${dmd.id_demande}/${'demande'}`} > 
+            <Link key={(data.sideOptActuel ? data.sideOptActuel : '') + Math.floor(Math.random() * (100 - 0 + 1)) + (cc+=1)} to={`/${params.role}/${params.id_user}/${params.version}/${dmd.id_demande}/${'demande'}`} > 
 
-                <div>
-                    {data.sideOptActuel}
-                </div>
             <div  className='demande'>
-                <div className='id-demande'>
-                    <h5>#</h5>
+                <div className={'circle-'+data.sideOptActuel}>
+                    
+                </div>
+                <div className='id-demande dmd-item'>
+                    <h5>#Number</h5>
+                    <div className='dmd-item-data'>
+
                     {dmd.id_demande}
+                    </div>
                 </div>
-                <div className='date-demande'>
+                <div className='date-demande dmd-item'>
                     <h5>Date Demande</h5>
+                    <div className='dmd-item-data'>
+
                     {dmd.date_demande}
+                    </div>
                 </div>
-                <div className='date-operation'>
-                    <h5>Date Operation</h5>
-                    {dmd.date_operation}
-                </div>
-                <div className='operationDb'>
+                <div className='operationDb dmd-item'>
                     <h5>Operation</h5>
+                    <div className='dmd-item-data'>
+
                     {dmd.operation}
+                    </div>
                 </div>
-                <div className='societe_client'>
+                <div className='date-operation dmd-item'>
+                    <h5>Date Operation</h5>
+                    <div className='dmd-item-data'>
+
+                    {dmd.date_operation}
+                    </div>
+                </div>
+                <div className='societe_client dmd-item'>
                     <h5>Societe_client</h5>
+                    <div className='dmd-item-data'>
+
                     {dmd.societe_user}
+                    </div>
                 </div>
             </div>
             </Link>
@@ -101,7 +116,7 @@ export default function Main (props) {
 return(
     <span className="main">
             {letGo ? listDemade : 'error main'}
-            <div>{props.boolSide}</div>
+            {/* <div>{props.boolSide}</div> */}
             
         </span>
     )
